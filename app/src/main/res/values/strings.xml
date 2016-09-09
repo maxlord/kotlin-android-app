@@ -1,0 +1,19 @@
+<resources>
+	<string name="app_name">Kotlin Android App</string>
+	<string name="activity_main_welcome">KOTLIN ANDROID APPLICATION</string>
+
+	<string name="navigation_drawer_open">Open navigation drawer</string>
+	<string name="navigation_drawer_close">Close navigation drawer</string>
+
+	<string name="drawer_menu_item_home">Главная</string>
+	<string name="drawer_menu_item_exit">Выход</string>
+
+	<string name="common_warning">Внимание</string>
+	<string name="common_info">Информация</string>
+	<string name="common_error">Ошибка</string>
+	<string name="common_ok">OK</string>
+	<string name="common_delete">Удалить</string>
+	<string name="common_cancel">Отмена</string>
+	<string name="dialog_button_logout">Выйти</string>
+	<string name="dialog_confirm_exit">Вы действительно хотите выйти из приложения?</string>
+</resources>

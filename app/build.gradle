@@ -1,0 +1,132 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'io.fabric'
+apply plugin: 'com.getkeepsafe.dexcount'
+
+android {
+	compileSdkVersion 23
+	buildToolsVersion "23.0.2"
+
+	defaultConfig {
+		applicationId "ru.maxlord.kotlinandroidapp"
+		minSdkVersion 15
+		targetSdkVersion 23
+		versionCode 1
+		versionName "1.0"
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+		buildConfigField "String", "BUILD_TIME", "\"${buildTime()}\""
+		buildConfigField "String", "API_URL", "\"https://api.ru/v1/api/\""
+	}
+
+	signingConfigs {
+		debug {
+
+		}
+
+		release {
+//			storeFile     file(System.getenv("ANDROID_APP_PRIVATE_KEY"))
+//			keyAlias      System.getenv("ANDROID_APP_ALIAS")
+//			storePassword System.getenv("ANDROID_APP_STORE_PW")
+//			keyPassword   System.getenv("ANDROID_APP_PW")
+		}
+	}
+
+	buildTypes {
+		debug {
+			ext.enableCrashlytics = false
+		}
+
+		release {
+			minifyEnabled true
+			signingConfig signingConfigs.release
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
+
+	packagingOptions {
+		exclude 'META-INF/LICENSE.txt'
+		exclude 'META-INF/NOTICE.txt'
+		exclude 'META-INF/services/javax.annotation.processing.Processor'
+	}
+
+	lintOptions {
+		abortOnError false
+	}
+
+	sourceSets {
+		main.java.srcDirs += 'src/main/kotlin'
+	}
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+	androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+		exclude group: 'com.android.support', module: 'support-annotations'
+	})
+	compile 'com.android.support:appcompat-v7:23.4.0'
+	testCompile 'junit:junit:4.12'
+
+	compile supportDependencies.supportV13
+	compile supportDependencies.appCompat
+	compile supportDependencies.recyclerView
+	compile supportDependencies.cardView
+	compile supportDependencies.design
+
+//	compile googlePlayServices.base
+//	compile googlePlayServices.maps
+//	compile googlePlayServices.gcm
+
+	compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	compile 'com.google.dagger:dagger:2.2'
+	kapt 'com.google.dagger:dagger-compiler:2.2'
+	provided 'org.glassfish:javax.annotation:10.0-b28'
+	compile 'com.jakewharton.timber:timber:4.1.1'
+
+	// Rx
+	compile 'io.reactivex:rxkotlin:0.40.1'
+	compile 'io.reactivex:rxandroid:1.1.0'
+	compile 'com.trello:rxlifecycle:0.3.0'
+	compile 'com.trello:rxlifecycle-components:0.3.0'
+	compile 'com.jakewharton.rxbinding:rxbinding-kotlin:0.4.0'
+	compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7-kotlin:0.4.0'
+
+	// Retrofit
+	compile 'com.squareup.retrofit2:retrofit:2.0.0'
+	compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+	compile'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+	// OkHttp
+	compile 'com.squareup.okhttp3:okhttp:3.2.0'
+	compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+
+	// Anko
+	compile 'org.jetbrains.anko:anko-sdk15:0.8.3' // sdk19, sdk21, sdk23 are also available
+	compile 'org.jetbrains.anko:anko-appcompat-v7:0.8.3' // For appcompat-v7 bindings
+
+	compile 'com.squareup:otto:1.3.8'
+
+	compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+		transitive = true;
+	}
+}
+
+kapt {
+	generateStubs = true
+}
+
+apply from: '../publishRelease.gradle'
+
+
+def buildTime() {
+	def df = new SimpleDateFormat("dd.MM.yyyy")
+	df.setTimeZone(TimeZone.getTimeZone("UTC"))
+
+	return df.format(new Date())
+}
+
+repositories {
+	mavenCentral()
+}

@@ -1,0 +1,26 @@
+ext {
+	//Version
+	supportLibrary = '23.4.0'
+
+	// Support Libraries dependencies
+	supportDependencies = [
+			design              :   "com.android.support:design:${supportLibrary}",
+			recyclerView        :   "com.android.support:recyclerview-v7:${supportLibrary}",
+			cardView            :   "com.android.support:cardview-v7:${supportLibrary}",
+			appCompat           :   "com.android.support:appcompat-v7:${supportLibrary}",
+			supportAnnotation   :   "com.android.support:support-annotations:${supportLibrary}",
+			supportV4           :   "com.android.support:support-v4:${supportLibrary}",
+			supportV13          :   "com.android.support:support-v13:${supportLibrary}",
+	]
+
+	// Google Play Services Version
+	googlePlayServicesVersion = '9.4.0'
+
+	// Google Play Services
+	googlePlayServices = [
+			base            :   "com.google.android.gms:play-services-base:${googlePlayServicesVersion}",
+//			location        :   "com.google.android.gms:play-services-location:${googlePlayServicesVersion}",
+			maps            :   "com.google.android.gms:play-services-maps:${googlePlayServicesVersion}",
+			gcm             :   "com.google.android.gms:play-services-gcm:${googlePlayServicesVersion}"
+	]
+}
