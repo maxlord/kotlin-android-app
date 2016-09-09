@@ -2,7 +2,7 @@
 Skeleton for Android Application use Kotlin
 
 # Dependencies
- - Dagger 2 - DI
+ - [Dagger 2][https://github.com/google/dagger] - DI
  - RxJava
  - Retrofit 2 - REST API
  - Timber - Logger
